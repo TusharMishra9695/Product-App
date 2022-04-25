@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Paper } from "@material-ui/core";
+import { styleDetail } from "../Utils/globalFunctions";
 import axios from "axios";
 
 export default function ProductDetail(props) {
@@ -15,20 +16,13 @@ export default function ProductDetail(props) {
       setproductDetail(res?.data);
     });
   }
-  const style = {
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    flexDirection: "column",
-    alignItems: "center",
-  };
 
   return (
     productDetail && (
       <div>
         <Container>
           <Paper className="card2">
-            <div style={style}>
+            <div style={styleDetail}>
               <div style={{ float: "left", marginLeft: "20px" }}>
                 <img
                   src={productDetail.image}
