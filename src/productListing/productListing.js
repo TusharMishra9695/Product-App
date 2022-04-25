@@ -34,25 +34,29 @@ export default function ProductListing() {
   }
 
   return (
-    <>
-      {productList &&
-        productList.map((prop, index) => {
-          const { id, title, image } = prop;
-          return (
-            <div key={index}>
-              <Card className="card" style={style}>
-                <CardContent>
-                  <small>{id}</small>
-                </CardContent>
-                <h3>{title}</h3>
-                <Link to={`/product-listing/${id}`}>
-                  <img src={image} alt="error " className="Handleimg" />
-                </Link>
-              </Card>
-            </div>
-          );
-        })}
-      <Pagination handleClick={handlePagination} pageCount={pageCount} />
-    </>
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div>
+        {productList &&
+          productList.map((prop, index) => {
+            const { id, title, image } = prop;
+            return (
+              <div key={index} className="manage-card">
+                <Card className="card" style={style}>
+                  <CardContent>
+                    <small>{id}</small>
+                  </CardContent>
+                  <h3>{title}</h3>
+                  <Link to={`/product-listing/${id}`}>
+                    <img src={image} alt="error " className="Handleimg" />
+                  </Link>
+                </Card>
+              </div>
+            );
+          })}
+      </div>
+      <div className="responsive-ul">
+        <Pagination handleClick={handlePagination} pageCount={pageCount} />
+      </div>
+    </div>
   );
 }

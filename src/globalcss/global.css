@@ -36,3 +36,12 @@
 body {
   background-color: rgb(252, 249, 249);
 }
+.responsive-ul {
+  display: flex;
+  justify-content: center;
+}
+.manage-card {
+  display: block;
+  height: 100%;
+  width: 100%;
+}

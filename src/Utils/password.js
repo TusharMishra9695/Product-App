@@ -1,4 +1,4 @@
-export const passwords = [
+export const allowedPass = [
   {
     username: "tushar",
     password: "adminpass0",
