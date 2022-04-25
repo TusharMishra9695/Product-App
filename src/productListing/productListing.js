@@ -8,25 +8,29 @@ import axios from "axios";
 export default function ProductListing() {
   const [productList, setproductList] = useState([]);
   const [pageCount, setpageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
-  let itemsPerPage = 20;
+  const url = "https://fakestoreapi.com/products";
+  let itemsPerPage = 10;
   let count = [];
 
   useEffect(() => {
     getListing();
   }, []);
   function getListing() {
-    const endOffset = itemOffset + itemsPerPage;
-    const url = "https://fakestoreapi.com/products";
     axios.get(url).then((res) => {
       count = handleList(res?.data);
-      setproductList(count.slice(itemOffset, endOffset));
+      setproductList(count.slice(0, 10));
       setpageCount(Math.ceil(count.length / itemsPerPage));
     });
   }
 
-  function handlePagination() {
-    console.log("accessable");
+  function handlePagination(event) {
+    axios.get(url).then((res) => {
+      count = handleList(res?.data);
+      setproductList(
+        count.slice(event.selected * 10, event.selected * 10 + itemsPerPage)
+      );
+      setpageCount(Math.ceil(count.length / itemsPerPage));
+    });
   }
 
   return (
@@ -48,10 +52,7 @@ export default function ProductListing() {
             </div>
           );
         })}
-      <Pagination
-        handleClick={() => handlePagination()}
-        pageCount={pageCount}
-      />
+      <Pagination handleClick={handlePagination} pageCount={pageCount} />
     </>
   );
 }
