@@ -3,6 +3,7 @@ import "../globalcss/global.css";
 import Pagination from "../component/Pagination";
 import { handleList, style } from "../Utils/globalFunctions";
 import { Link } from "react-router-dom";
+import Logout from "../Home/Logout";
 import { Card, CardContent } from "@material-ui/core";
 import axios from "axios";
 export default function ProductListing() {
@@ -35,6 +36,9 @@ export default function ProductListing() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
+      <div>
+        <Logout />
+      </div>
       <div>
         {productList &&
           productList.map((prop, index) => {

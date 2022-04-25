@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Container, Paper } from "@material-ui/core";
+import Logout from "../Home/Logout";
 import { styleDetail } from "../Utils/globalFunctions";
 import axios from "axios";
 
@@ -10,6 +11,7 @@ export default function ProductDetail(props) {
   useEffect(() => {
     getDetail();
   }, []);
+
   function getDetail() {
     const url = `https://fakestoreapi.com/products/${params.id}`;
     axios.get(url).then((res) => {
@@ -20,15 +22,18 @@ export default function ProductDetail(props) {
   return (
     productDetail && (
       <div>
+        <Logout />
         <Container>
           <Paper className="card2">
             <div style={styleDetail}>
               <div style={{ float: "left", marginLeft: "20px" }}>
-                <img
-                  src={productDetail.image}
-                  alt="loading..."
-                  className="Handleimg2"
-                />
+                <Link to="/">
+                  <img
+                    src={productDetail.image}
+                    alt="loading..."
+                    className="Handleimg2"
+                  />
+                </Link>
                 <br />
                 {productDetail.description}
                 <hr style={{ width: "100%", maxWidth: "700px" }} />
