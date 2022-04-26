@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { allowedPass } from "../Utils/password";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 export default function Home() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("user")) {

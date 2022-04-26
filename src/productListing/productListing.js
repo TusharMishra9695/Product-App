@@ -3,35 +3,36 @@ import "../globalcss/global.css";
 import Pagination from "../component/Pagination";
 import { handleList, style } from "../Utils/globalFunctions";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logout from "../Home/Logout";
 import { Card, CardContent } from "@material-ui/core";
 import axios from "axios";
-export default function ProductListing() {
+export default function ProductListing(props) {
+  const navigate = useNavigate();
   const [productList, setproductList] = useState([]);
   const [pageCount, setpageCount] = useState(0);
   const url = "https://fakestoreapi.com/products";
   let itemsPerPage = 10;
   let count = [];
+  let event = window.location.hash.split("#");
 
   useEffect(() => {
     getListing();
-  }, []);
+  }, [event[1]]);
   function getListing() {
-    axios.get(url).then((res) => {
-      count = handleList(res?.data);
-      setproductList(count.slice(0, 10));
-      setpageCount(Math.ceil(count.length / itemsPerPage));
-    });
-  }
-
-  function handlePagination(event) {
+    let itemoffset = (event[1] || 1) - 1;
+    console.log(itemoffset);
     axios.get(url).then((res) => {
       count = handleList(res?.data);
       setproductList(
-        count.slice(event.selected * 10, event.selected * 10 + itemsPerPage)
+        count.slice(itemoffset * 10, itemoffset * 10 + itemsPerPage)
       );
       setpageCount(Math.ceil(count.length / itemsPerPage));
     });
+  }
+  function handlePagination(event) {
+    let browserURl = `/product-listing/#${event.selected + 1}`;
+    navigate(browserURl);
   }
 
   return (

@@ -3,9 +3,10 @@ import ReactPaginate from "react-paginate";
 import "../globalcss/global.css";
 
 export default function Pagination(props) {
+  let event = window.location.hash.split("#");
+
   return (
     <ReactPaginate
-      nextLabel="next"
       onPageChange={props.handleClick}
       pageRangeDisplayed={3}
       marginPagesDisplayed={2}
@@ -21,7 +22,9 @@ export default function Pagination(props) {
       breakClassName="page-item"
       breakLinkClassName="page-link"
       containerClassName="pagination"
-      activeClassName="active"
+      nextLabel="next"
+      activeClassName={"active"}
+      forcePage={(event[1] || 1) - 1}
       renderOnZeroPageCount={null}
     />
   );
