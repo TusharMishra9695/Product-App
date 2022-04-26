@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { TextField, Button } from "@material-ui/core";
 import {
   productStyle,
@@ -12,6 +13,7 @@ export default function AddProduct() {
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
   const [price, setprice] = useState("");
+  const [url, seturl] = useState("");
   function handleSubmit(e) {
     e.preventDefault();
     let details = [
@@ -19,6 +21,7 @@ export default function AddProduct() {
         title: title,
         description: description,
         price: price,
+        imageURL: url,
       },
     ];
     if (title && description && price) {
@@ -28,6 +31,33 @@ export default function AddProduct() {
       alert("Please enter all details");
     }
   }
+  const handleChange = (event) => {
+    let image = event.target.files[0];
+    const size = image.size / 1024 / 1024;
+    if (!image.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+      alert("select valid image.");
+      return false;
+    }
+    if (size > 10) {
+      event.target.files[0] = [];
+      window.alert("Please upload a file smaller than 10 MB");
+      return false;
+    } else {
+      const data = new FormData();
+      data.append("file", image);
+      data.append("upload_preset", "product-app");
+      data.append("cloud_name", "ramdomfileupload");
+      axios
+        .post(
+          "https://api.cloudinary.com/v1_1/ramdomfileupload/image/upload",
+          data
+        )
+        .then((res) => {
+          alert("Image Upload Successfully");
+          seturl(res.data.url);
+        });
+    }
+  };
 
   return (
     <div>
@@ -89,8 +119,8 @@ export default function AddProduct() {
                 <input
                   accept="image/*"
                   id="contained-button-file"
-                  multiple
                   type="file"
+                  onChange={handleChange}
                 />
               </div>
             </div>
