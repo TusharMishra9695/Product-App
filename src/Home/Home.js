@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Button } from "@material-ui/core";
 import { allowedPass } from "../Utils/password";
+import {
+  productStyle,
+  submitStyle,
+  mainStyle,
+  commonLeftstyle,
+  widthstyle,
+} from "../Utils/globalFunctions";
 import { useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,51 +32,42 @@ export default function Home() {
       navigate("/product-listing");
     } else alert("wrong password");
   }
+
+  function Validate(body) {
+    if (/\b[a-z]|\w[A-Z]/.test(body)) {
+      return true;
+    }
+
+    return false;
+  }
   return (
     <div>
       <div>
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <form onSubmit={handleSubmit} style={mainStyle}>
           <div className="box1">
-            <div
-              style={{
-                paddingTop: "40px",
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <div style={productStyle}>
               <h1>Log in</h1>
             </div>
-            <div style={{ paddingLeft: "20px" }}>
+            <div style={commonLeftstyle}>
               <h5>Username</h5>
               <div>
                 {" "}
                 <TextField
                   variant="outlined"
                   label="Enter Username"
-                  style={{
-                    width: "100%",
-                    maxWidth: "350px",
-                  }}
+                  style={widthstyle}
                   onChange={(e) => setUsername(e.target.value)}
                   value={username}
                   type="text "
                   name="username"
                   id="username"
                 />{" "}
-                {/* {!Validate(username) && (
+                {!Validate(username) && (
                   <p style={{ color: "red" }}>Please Enter Username</p>
-                )}{" "} */}
+                )}{" "}
               </div>
             </div>
-            <div style={{ paddingLeft: "20px", marginTop: "20px" }}>
+            <div style={commonLeftstyle}>
               <h5>Password</h5>
               <div>
                 {" "}
@@ -76,18 +75,15 @@ export default function Home() {
                   type="password"
                   variant="outlined"
                   label="Enter Password"
-                  style={{
-                    width: "100%",
-                    maxWidth: "350px",
-                  }}
+                  style={widthstyle}
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   name="password"
                   id="password"
                 />{" "}
-                {/* {!Validate(password) && (
-                  <p style={{ color: "red" }}>Enter Password in letters</p>
-                )}{" "} */}
+                {!Validate(password) && (
+                  <p style={{ color: "red" }}>Please Enter Password</p>
+                )}{" "}
               </div>
             </div>
 
@@ -95,13 +91,7 @@ export default function Home() {
               <Button
                 variant="contained"
                 color="primary"
-                style={{
-                  width: "100%",
-                  maxWidth: "350px",
-                  height: "40px",
-                  marginTop: "30px",
-                  marginLeft: "20px",
-                }}
+                style={submitStyle}
                 type="submit"
               >
                 Submit

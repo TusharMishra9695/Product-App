@@ -24,3 +24,38 @@ export const styleDetail = {
   flexDirection: "column",
   alignItems: "center",
 };
+export const buttonStyle = {
+  cursor: "pointer",
+  marginLeft: "60px",
+  background: "black",
+  color: "white",
+  width: "150px",
+  height: "40px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "5px",
+};
+export const productStyle = {
+  paddingTop: "40px",
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "column",
+};
+export const mainStyle = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
+export const submitStyle = {
+  width: "100%",
+  maxWidth: "350px",
+  height: "40px",
+  marginTop: "30px",
+  marginLeft: "20px",
+};
+export const commonLeftstyle = { paddingLeft: "20px", marginTop: "20px" };
+export const widthstyle = {
+  width: "100%",
+  maxWidth: "350px",
+};

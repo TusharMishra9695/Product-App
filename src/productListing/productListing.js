@@ -21,7 +21,6 @@ export default function ProductListing(props) {
   }, [event[1]]);
   function getListing() {
     let itemoffset = (event[1] || 1) - 1;
-    console.log(itemoffset);
     axios.get(url).then((res) => {
       count = handleList(res?.data);
       setproductList(
