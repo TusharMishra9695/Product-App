@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { TextField, Button } from "@material-ui/core";
-import {
-  productStyle,
-  submitStyle,
-  mainStyle,
-  commonLeftstyle,
-  widthstyle,
-} from "../Utils/globalFunctions";
+import { btn } from "../Utils/globalFunctions";
+import { cloneDeep } from "lodash";
+import { TextField } from "@material-ui/core";
 
 export default function AddProduct() {
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
   const [price, setprice] = useState("");
   const [url, seturl] = useState("");
+  cloneDeep("");
   function handleSubmit(e) {
     e.preventDefault();
     let details = [
@@ -26,6 +22,9 @@ export default function AddProduct() {
     ];
     if (title && description && price) {
       localStorage.setItem("items", JSON.stringify(details));
+      settitle(cloneDeep(""));
+      setdescription(cloneDeep(""));
+      setprice(cloneDeep(""));
       alert("Product details saved at localstorage");
     } else {
       alert("Please enter all details");
@@ -34,14 +33,13 @@ export default function AddProduct() {
   const handleChange = (event) => {
     let image = event.target.files[0];
     const size = image.size / 1024 / 1024;
+    console.log(size);
     if (!image.name.match(/\.(jpg|jpeg|png|gif)$/)) {
       alert("select valid image.");
       return false;
     }
     if (size > 10) {
-      event.target.files[0] = [];
-      window.alert("Please upload a file smaller than 10 MB");
-      return false;
+      alert("Please upload a file smaller than 10 MB");
     } else {
       const data = new FormData();
       data.append("file", image);
@@ -62,18 +60,18 @@ export default function AddProduct() {
   return (
     <div>
       <div>
-        <form onSubmit={handleSubmit} style={mainStyle}>
+        <form onSubmit={handleSubmit} className="main-style">
           <div className="box1">
-            <div style={productStyle}>
+            <div className="product-style">
               <h1>Add Product</h1>
             </div>
-            <div style={commonLeftstyle}>
+            <div className="commonLeftstyle">
               <h5>Title</h5>
               <div>
                 <TextField
                   variant="outlined"
                   label="Enter Title"
-                  style={widthstyle}
+                  className="width-style"
                   onChange={(e) => settitle(e.target.value)}
                   value={title}
                   type="text "
@@ -82,14 +80,14 @@ export default function AddProduct() {
                 />
               </div>
             </div>
-            <div style={commonLeftstyle}>
+            <div className="commonLeftstyle">
               <h5>Description</h5>
               <div>
                 <TextField
                   type="text"
                   variant="outlined"
                   label="Enter Description"
-                  style={widthstyle}
+                  className="width-style"
                   onChange={(e) => setdescription(e.target.value)}
                   value={description}
                   name="Description"
@@ -97,7 +95,7 @@ export default function AddProduct() {
                 />{" "}
               </div>
             </div>
-            <div style={commonLeftstyle}>
+            <div className="commonLeftstyle">
               <h5>Price</h5>
               <div>
                 {" "}
@@ -105,7 +103,7 @@ export default function AddProduct() {
                   type="text"
                   variant="outlined"
                   label="Enter Price"
-                  style={widthstyle}
+                  className="width-style"
                   onChange={(e) => setprice(e.target.value)}
                   value={price}
                   name="Price"
@@ -113,7 +111,7 @@ export default function AddProduct() {
                 />{" "}
               </div>
             </div>
-            <div style={commonLeftstyle}>
+            <div className="commonLeftstyle">
               <h5>Add Image</h5>
               <div>
                 <input
@@ -125,16 +123,7 @@ export default function AddProduct() {
               </div>
             </div>
 
-            <div>
-              <Button
-                variant="contained"
-                color="primary"
-                style={submitStyle}
-                type="submit"
-              >
-                Submit
-              </Button>
-            </div>
+            <div>{btn}</div>
           </div>
         </form>
       </div>

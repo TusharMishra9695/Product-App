@@ -10,7 +10,7 @@ export default function RouteRole() {
     <Routes>
       <Route exact path="/product-listing" element={<ProductListing />} />
       <Route exact path="/" element={<Home />} />
-      <Route exact path="/product-listing/:id" element={<ProductDetail />} />
+      <Route exact path="/product-detail/:id" element={<ProductDetail />} />
       <Route exact path="/add-product" element={<AddProduct />} />
     </Routes>
   );

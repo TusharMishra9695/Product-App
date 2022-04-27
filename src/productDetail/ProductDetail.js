@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Paper } from "@material-ui/core";
 import Logout from "../Home/Logout";
-import { styleDetail } from "../Utils/globalFunctions";
 import axios from "axios";
 
 export default function ProductDetail(props) {
   const [productDetail, setproductDetail] = useState([]);
   const params = useParams();
-  useEffect(() => {
-    getDetail();
-  }, []);
 
-  function getDetail() {
+  const getDetail = useCallback(() => {
     const url = `https://fakestoreapi.com/products/${params.id}`;
     axios.get(url).then((res) => {
       setproductDetail(res?.data);
     });
-  }
+  }, [params.id]);
+  useEffect(() => {
+    getDetail();
+  }, [getDetail]);
 
   return (
     productDetail && (
@@ -25,7 +24,7 @@ export default function ProductDetail(props) {
         <Logout />
         <Container>
           <Paper className="card2">
-            <div style={styleDetail}>
+            <div className="style-detail">
               <div style={{ float: "left", marginLeft: "20px" }}>
                 <Link to="/">
                   <img

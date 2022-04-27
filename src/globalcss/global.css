@@ -45,3 +45,59 @@ body {
   height: 100%;
   width: 100%;
 }
+.manage-style {
+  border-radius: 20px !important;
+  box-shadow: 1px 1px 2px 2px grey !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.style-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.button-style {
+  cursor: pointer;
+  margin-left: 60px;
+  background: black;
+  color: white;
+  width: 150px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+.product-style {
+  padding-top: 40px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.main-style {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.submit-style {
+  width: 100%;
+  max-width: 350px;
+  height: 40px;
+  margin-top: 30px !important;
+  margin-left: 20px !important;
+}
+.width-style {
+  width: 100%;
+  max-width: 350px;
+}
+.commonLeftstyle {
+  padding-left: 20px;
+  margin-top: 20px;
+}
+.manage-res {
+  display: flex;
+  flex-direction: column;
+}

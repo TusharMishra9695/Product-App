@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import { allowedPass } from "../Utils/password";
-import {
-  productStyle,
-  submitStyle,
-  mainStyle,
-  commonLeftstyle,
-  widthstyle,
-} from "../Utils/globalFunctions";
+import { btn } from "../Utils/globalFunctions";
 import { useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
@@ -19,18 +13,18 @@ export default function Home() {
     if (localStorage.getItem("user")) {
       navigate("/product-listing");
     }
-  }, []);
+  }, [navigate]);
   function handleSubmit(e) {
     e.preventDefault();
     const result = allowedPass.filter((allowedPass) => {
       return (
-        username == allowedPass.username && password == allowedPass.password
+        username === allowedPass.username && password === allowedPass.password
       );
     });
     if (result.length) {
       localStorage.setItem("user", JSON.stringify(result[0]));
       navigate("/product-listing");
-    } else alert("wrong password");
+    } else alert("Invalid Credentials ");
   }
 
   function Validate(body) {
@@ -43,19 +37,19 @@ export default function Home() {
   return (
     <div>
       <div>
-        <form onSubmit={handleSubmit} style={mainStyle}>
+        <form onSubmit={handleSubmit} className="main-style">
           <div className="box1">
-            <div style={productStyle}>
+            <div className="product-style">
               <h1>Log in</h1>
             </div>
-            <div style={commonLeftstyle}>
+            <div className="commonLeftstyle">
               <h5>Username</h5>
               <div>
                 {" "}
                 <TextField
                   variant="outlined"
                   label="Enter Username"
-                  style={widthstyle}
+                  className="width-style"
                   onChange={(e) => setUsername(e.target.value)}
                   value={username}
                   type="text "
@@ -67,7 +61,7 @@ export default function Home() {
                 )}{" "}
               </div>
             </div>
-            <div style={commonLeftstyle}>
+            <div className="commonLeftstyle">
               <h5>Password</h5>
               <div>
                 {" "}
@@ -75,7 +69,7 @@ export default function Home() {
                   type="password"
                   variant="outlined"
                   label="Enter Password"
-                  style={widthstyle}
+                  className="width-style"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   name="password"
@@ -86,17 +80,7 @@ export default function Home() {
                 )}{" "}
               </div>
             </div>
-
-            <div>
-              <Button
-                variant="contained"
-                color="primary"
-                style={submitStyle}
-                type="submit"
-              >
-                Submit
-              </Button>
-            </div>
+            <div>{btn}</div>
           </div>
         </form>
       </div>

@@ -3,8 +3,8 @@ import ReactPaginate from "react-paginate";
 import "../globalcss/global.css";
 
 export default function Pagination(props) {
-  let event = window.location.hash.split("#");
-
+  const queryString = require("query-string");
+  const parsed = queryString.parse(window.location.search);
   return (
     <ReactPaginate
       onPageChange={props.handleClick}
@@ -24,7 +24,7 @@ export default function Pagination(props) {
       containerClassName="pagination"
       nextLabel="next"
       activeClassName={"active"}
-      forcePage={(event[1] || 1) - 1}
+      forcePage={(parsed.page || 1) - 1}
       renderOnZeroPageCount={null}
     />
   );

@@ -1,5 +1,4 @@
 import React from "react";
-import { buttonStyle } from "../Utils/globalFunctions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -12,11 +11,11 @@ export default function Logout() {
   return (
     <>
       <div style={{ display: "flex", marginTop: "20px" }}>
-        <h4 onClick={lgout} style={buttonStyle}>
+        <h4 onClick={lgout} className="button-style">
           Logout
         </h4>
         <Link to="/add-product" style={{ textDecoration: "none" }}>
-          <h4 style={buttonStyle}>Add Product</h4>
+          <h4 className="button-style">Add Product</h4>
         </Link>
       </div>
     </>
