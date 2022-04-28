@@ -174,7 +174,7 @@ export default function AddProduct() {
                   )}
                 </div>
               )}
-              {preview && <img src={url} className="pre-image" />}
+              {preview && <img src={url} className="pre-image" alt="" />}
               <p className="error">
                 {validate && !url.length && "Please select image"}{" "}
               </p>

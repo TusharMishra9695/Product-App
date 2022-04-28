@@ -32,13 +32,6 @@ export default function Home() {
     }
   }
 
-  function Validate(body) {
-    if (/\b[a-z]|\w[A-Z]/.test(body)) {
-      return true;
-    }
-
-    return false;
-  }
   return (
     <div>
       <div>
