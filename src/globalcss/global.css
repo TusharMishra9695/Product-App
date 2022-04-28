@@ -71,6 +71,28 @@ body {
   justify-content: center;
   border-radius: 5px;
 }
+.pre-style {
+  cursor: pointer;
+  background: black;
+  color: white;
+  width: 100px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.cross {
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.pre-image {
+  width: 350px;
+  height: 150px;
+}
 .product-style {
   padding-top: 40px;
   align-items: center;
@@ -100,4 +122,7 @@ body {
 .manage-res {
   display: flex;
   flex-direction: column;
+}
+.error {
+  color: red !important;
 }

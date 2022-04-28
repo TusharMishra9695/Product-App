@@ -58,9 +58,8 @@ export default function ProductListing(props) {
               <div key={index} className="manage-card">
                 <Card className="card manage-style">
                   <CardContent>
-                    <small>{id}</small>
+                    <h3>{title}</h3>
                   </CardContent>
-                  <h3>{title}</h3>
                   <Link to={`/product-detail/${id}`}>
                     <img src={image} alt="error " className="Handleimg" />
                   </Link>

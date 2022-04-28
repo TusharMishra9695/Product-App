@@ -5,8 +5,8 @@ import { btn } from "../Utils/globalFunctions";
 import { useNavigate } from "react-router-dom";
 export default function Home() {
   const navigate = useNavigate();
-
   const [username, setUsername] = useState("");
+  const [error, seterror] = useState("");
   const [password, setPassword] = useState("");
 
   useEffect(() => {
@@ -16,15 +16,20 @@ export default function Home() {
   }, [navigate]);
   function handleSubmit(e) {
     e.preventDefault();
-    const result = allowedPass.filter((allowedPass) => {
-      return (
-        username === allowedPass.username && password === allowedPass.password
-      );
-    });
-    if (result.length) {
-      localStorage.setItem("user", JSON.stringify(result[0]));
-      navigate("/product-listing");
-    } else alert("Invalid Credentials ");
+    if (username && password) {
+      const result = allowedPass.filter((allowedPass) => {
+        return (
+          username === allowedPass.username && password === allowedPass.password
+        );
+      });
+      if (result.length) {
+        localStorage.setItem("user", JSON.stringify(result[0]));
+        seterror(false);
+        navigate("/product-listing");
+      } else alert("Invalid Credentials ");
+    } else {
+      seterror(true);
+    }
   }
 
   function Validate(body) {
@@ -56,10 +61,10 @@ export default function Home() {
                   name="username"
                   id="username"
                 />{" "}
-                {!Validate(username) && (
-                  <p style={{ color: "red" }}>Please Enter Username</p>
-                )}{" "}
               </div>
+              <p className="error">
+                {error && !username.length && "Please enter username"}{" "}
+              </p>
             </div>
             <div className="commonLeftstyle">
               <h5>Password</h5>
@@ -75,10 +80,10 @@ export default function Home() {
                   name="password"
                   id="password"
                 />{" "}
-                {!Validate(password) && (
-                  <p style={{ color: "red" }}>Please Enter Password</p>
-                )}{" "}
               </div>
+              <p className="error">
+                {error && !password.length && "Please enter password"}{" "}
+              </p>
             </div>
             <div>{btn}</div>
           </div>

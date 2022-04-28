@@ -9,6 +9,8 @@ export default function AddProduct() {
   const [description, setdescription] = useState("");
   const [price, setprice] = useState("");
   const [url, seturl] = useState("");
+  const [validate, setvalidate] = useState(false);
+  const [preview, setpreview] = useState(false);
   const [id, setid] = useState(51);
   cloneDeep("");
   function handleSubmit(e) {
@@ -20,7 +22,7 @@ export default function AddProduct() {
       price: price,
       image: url,
     };
-    if (title && description && price) {
+    if (title && description && price && url) {
       if (!localStorage.getItem("items")) {
         localStorage.setItem("items", "[]");
       }
@@ -31,9 +33,11 @@ export default function AddProduct() {
       settitle(cloneDeep(""));
       setdescription(cloneDeep(""));
       setprice(cloneDeep(""));
+      seturl(cloneDeep(""));
+      setvalidate(false);
       alert("Product Added Successfully");
     } else {
-      alert("Please enter all details");
+      setvalidate(true);
     }
   }
   const handleChange = (event) => {
@@ -84,11 +88,15 @@ export default function AddProduct() {
                   id="Title"
                 />
               </div>
+              <p className="error">
+                {validate && !title.length && "Please enter title"}
+              </p>
             </div>
             <div className="commonLeftstyle">
               <h5>Description</h5>
               <div>
                 <TextField
+                  disabled={description.length === 500}
                   type="text"
                   variant="outlined"
                   label="Enter Description"
@@ -97,15 +105,22 @@ export default function AddProduct() {
                   value={description}
                   name="Description"
                   id="Description"
-                />{" "}
+                  helperText={
+                    description.length
+                      ? `${500 - description.length} Words Left`
+                      : ""
+                  }
+                />
               </div>
+              <p className="error">
+                {validate && !description.length && "Please enter description"}{" "}
+              </p>
             </div>
             <div className="commonLeftstyle">
               <h5>Price</h5>
               <div>
-                {" "}
                 <TextField
-                  type="text"
+                  type="number"
                   variant="outlined"
                   label="Enter Price"
                   className="width-style"
@@ -113,8 +128,11 @@ export default function AddProduct() {
                   value={price}
                   name="Price"
                   id="Price"
-                />{" "}
+                />
               </div>
+              <p className="error">
+                {validate && !price.length && "Please enter price"}{" "}
+              </p>
             </div>
             <div className="commonLeftstyle">
               <h5>Add Image</h5>
@@ -126,6 +144,34 @@ export default function AddProduct() {
                   onChange={handleChange}
                 />
               </div>
+
+              {url && (
+                <div style={{ display: "flex" }}>
+                  <h6 className="pre-style" onClick={() => setpreview(true)}>
+                    Preview
+                  </h6>
+                  {preview && (
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      onClick={() => setpreview(false)}
+                      className="cross"
+                    >
+                      <path
+                        d="M10.6491 8.99995L17.6579 1.9909C18.1141 1.53499 18.1141 0.797843 17.6579 0.341933C17.202 -0.113978 16.4649 -0.113978 16.009 0.341933L8.99991 7.35099L1.99106 0.341933C1.53493 -0.113978 0.798003 -0.113978 0.342093 0.341933C-0.114031 0.797843 -0.114031 1.53499 0.342093 1.9909L7.35094 8.99995L0.342093 16.009C-0.114031 16.4649 -0.114031 17.2021 0.342093 17.658C0.569301 17.8854 0.868045 17.9996 1.16658 17.9996C1.46511 17.9996 1.76364 17.8854 1.99106 17.658L8.99991 10.6489L16.009 17.658C16.2364 17.8854 16.5349 17.9996 16.8335 17.9996C17.132 17.9996 17.4305 17.8854 17.6579 17.658C18.1141 17.2021 18.1141 16.4649 17.6579 16.009L10.6491 8.99995Z"
+                        fill="black"
+                      />
+                    </svg>
+                  )}
+                </div>
+              )}
+              {preview && <img src={url} className="pre-image" />}
+              <p className="error">
+                {validate && !url.length && "Please select image"}{" "}
+              </p>
             </div>
 
             <div>{btn}</div>
