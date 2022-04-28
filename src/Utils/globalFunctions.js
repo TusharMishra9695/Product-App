@@ -10,6 +10,12 @@ export function handleList(props) {
       props.map((data) => listData.push(data));
     }
   }
+  if (localStorage.getItem("items")) {
+    let local_details = JSON.parse(localStorage.getItem("items"));
+    for (let items = 0; items < local_details.length; items++) {
+      listData.push(local_details[items]);
+    }
+  }
   return listData;
 }
 

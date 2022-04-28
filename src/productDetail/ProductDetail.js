@@ -2,17 +2,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Paper } from "@material-ui/core";
 import Logout from "../Home/Logout";
-import axios from "axios";
 
 export default function ProductDetail(props) {
   const [productDetail, setproductDetail] = useState([]);
   const params = useParams();
 
   const getDetail = useCallback(() => {
-    const url = `https://fakestoreapi.com/products/${params.id}`;
-    axios.get(url).then((res) => {
-      setproductDetail(res?.data);
-    });
+    let detail = JSON.parse(localStorage.getItem("listData"));
+    setproductDetail(detail[params.id - 1]);
   }, [params.id]);
   useEffect(() => {
     getDetail();

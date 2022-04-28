@@ -22,6 +22,7 @@ export default function ProductListing(props) {
     axios.get(url).then((res) => {
       count.current = handleList(res?.data);
       setlistdata(count.current);
+      localStorage.setItem("listData", JSON.stringify(count.current));
       setproductList(
         count.current.slice(itemoffset * 10, itemoffset * 10 + itemsPerPage)
       );

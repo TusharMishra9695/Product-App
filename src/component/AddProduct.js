@@ -9,23 +9,29 @@ export default function AddProduct() {
   const [description, setdescription] = useState("");
   const [price, setprice] = useState("");
   const [url, seturl] = useState("");
+  const [id, setid] = useState(51);
   cloneDeep("");
   function handleSubmit(e) {
     e.preventDefault();
-    let details = [
-      {
-        title: title,
-        description: description,
-        price: price,
-        imageURL: url,
-      },
-    ];
+    let details = {
+      id: id,
+      title: title,
+      description: description,
+      price: price,
+      image: url,
+    };
     if (title && description && price) {
-      localStorage.setItem("items", JSON.stringify(details));
+      if (!localStorage.getItem("items")) {
+        localStorage.setItem("items", "[]");
+      }
+      let old_details = JSON.parse(localStorage.getItem("items"));
+      old_details.push(details);
+      localStorage.setItem("items", JSON.stringify(old_details));
+      setid(id + 1);
       settitle(cloneDeep(""));
       setdescription(cloneDeep(""));
       setprice(cloneDeep(""));
-      alert("Product details saved at localstorage");
+      alert("Product Added Successfully");
     } else {
       alert("Please enter all details");
     }
@@ -33,7 +39,6 @@ export default function AddProduct() {
   const handleChange = (event) => {
     let image = event.target.files[0];
     const size = image.size / 1024 / 1024;
-    console.log(size);
     if (!image.name.match(/\.(jpg|jpeg|png|gif)$/)) {
       alert("select valid image.");
       return false;
