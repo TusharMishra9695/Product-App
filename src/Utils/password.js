@@ -1,18 +1,18 @@
 export const allowedPass = [
   {
-    username: "tushar0",
-    password: "adminpass0",
+    username: "tushar",
+    password: "Adminpass@023",
   },
   {
-    username: "tushar1",
-    password: "adminpass1",
+    username: "gaurav",
+    password: "Adminpass@123",
   },
   {
-    username: "tushar2",
-    password: "adminpass2",
+    username: "rishabh",
+    password: "Adminpass@223",
   },
   {
-    username: "tushar3",
-    password: "adminpass3",
+    username: "satyam",
+    password: "Adminpass@323",
   },
 ];

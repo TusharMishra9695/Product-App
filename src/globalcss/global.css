@@ -126,3 +126,10 @@ body {
 .error {
   color: red !important;
 }
+.decoration {
+  text-decoration: none;
+}
+.handle-res {
+  display: flex;
+  margin-top: 20px;
+}

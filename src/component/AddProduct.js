@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import { btn } from "../Utils/globalFunctions";
 import { cloneDeep } from "lodash";
 import { TextField } from "@material-ui/core";
@@ -48,6 +49,8 @@ export default function AddProduct() {
       return false;
     }
     if (size > 10) {
+      document.getElementById("contained-button-file").value = null;
+      seturl(cloneDeep(""));
       alert("Please upload a file smaller than 10 MB");
     } else {
       const data = new FormData();
@@ -68,6 +71,9 @@ export default function AddProduct() {
 
   return (
     <div>
+      <Link to="/product-listing" className="decoration">
+        <h4 className="button-style">Back</h4>
+      </Link>
       <div>
         <form onSubmit={handleSubmit} className="main-style">
           <div className="box1">
@@ -107,7 +113,7 @@ export default function AddProduct() {
                   id="Description"
                   helperText={
                     description.length
-                      ? `${500 - description.length} Words Left`
+                      ? `${500 - description.length} Characters Left`
                       : ""
                   }
                 />

@@ -79,7 +79,12 @@ export default function Home() {
                   value={password}
                   name="password"
                   id="password"
-                />{" "}
+                  helperText={
+                    password.length && password.length < 9
+                      ? "Minimum 8 Characters required e.g.Yash@123"
+                      : ""
+                  }
+                />
               </div>
               <p className="error">
                 {error && !password.length && "Please enter password"}{" "}

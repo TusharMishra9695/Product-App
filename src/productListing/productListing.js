@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import "../globalcss/global.css";
 import Pagination from "../component/Pagination";
 import { handleList } from "../Utils/globalFunctions";
-import { Link } from "react-router-dom";
+import ListData from "./ListData";
 import { useNavigate } from "react-router-dom";
 import Logout from "../Home/Logout";
-import { Card, CardContent } from "@material-ui/core";
 import axios from "axios";
 export default function ProductListing(props) {
   const queryString = require("query-string");
@@ -54,18 +53,7 @@ export default function ProductListing(props) {
         {productList &&
           productList.map((prop, index) => {
             const { id, title, image } = prop;
-            return (
-              <div key={index} className="manage-card">
-                <Card className="card manage-style">
-                  <CardContent>
-                    <h3>{title}</h3>
-                  </CardContent>
-                  <Link to={`/product-detail/${id}`}>
-                    <img src={image} alt="error " className="Handleimg" />
-                  </Link>
-                </Card>
-              </div>
-            );
+            return <ListData key={index} id={id} title={title} image={image} />;
           })}
       </div>
       <div className="responsive-ul">
